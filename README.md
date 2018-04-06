@@ -61,7 +61,7 @@ To illustrate this flow within your `ocp-tasks` project, we assume that previous
 
 The trick here is to use a Jenkins instance to host the first part of your build process (like you would normally do in a traditional way without OpenShift). For doing that you may of course use a Jenkins instance deployed into your OpenShift project. You can easily create one using the `jenkins-persistent` template.
 
-In this Jenkins instance, create a new job item (calling it `bin-tasks` for example) and configure it as a regular Jenkins Maven build. In configuration, you may want to checkout this Github repository (`http://github.com/lbroudoux/openshift-tasks`), then to realize a `mvn package` and finally store the generated artifacts using Jenkins built-in store. This last choice is for letting things simple: in a real-world scenario, you would prefer storing the generated artifact into a Nexus or Artifactory repository.
+In this Jenkins instance, create a new job item (calling it `bin-tasks` for example) and configure it as a regular Jenkins Maven build. In configuration, you may want to checkout this Github repository (`http://github.com/yohanesws/openshift-tasks`), then to realize a `mvn package` and finally store the generated artifacts using Jenkins built-in store. This last choice is for letting things simple: in a real-world scenario, you would prefer storing the generated artifact into a Nexus or Artifactory repository.
 
 Now the second part is related to OpenShift. Because previous variant has been done, you are now able to:
 * Go to "Add to project" page,
@@ -92,7 +92,7 @@ You may notice that the steps of Pipeline are here predictable and managed in Je
 * Go to "Add to project" page,
 * Pick the `openshift-tasks-no-trigger` template,
 * Adapt the name of application to `jkp-tasks`,
-* Refer this Github repository (`http://github.com/lbroudoux/openshift-tasks`) or another internal one,
+* Refer this Github repository (`http://github.com/yohanesws/openshift-tasks`) or another internal one,
 * Hit the save button (a first Build should now have been started),
 * Declare a new Pipeline build configuration using `oc create -f https://raw.githubusercontent.com/yohanesws/openshift-tasks/master/pipeline-bc.yaml -n ocp-tasks`
 
@@ -102,7 +102,7 @@ A new Pipeline have been created and is now available through the console going 
 ### #5 - Build pipeline managed within Source code
 
 This variant consists in dynamically discovering a Jenkins configuration that will be used to configure a Build Pipeline within a Jenkins instance. It demonstrates the [Jenkinsfile build strategy](https://docs.openshift.com/container-platform/3.5/dev_guide/builds/build_strategies.html#pipeline-strategy-options) using an external `Jenkinsfile` that may be used to treat pipeline as code. At the beginning of every build iteration, OpenShift will discover this file and update the corresponding Pipeline definition in Jenkins. To illustrate this flow within your `ocp-tasks` project:
-* Register your app template in OpenShift using `oc create -f https://raw.githubusercontent.com/lbroudoux/openshift-tasks/master/app-template-jenkinsfile.yaml -n ocp-tasks`,
+* Register your app template in OpenShift using `oc create -f https://raw.githubusercontent.com/yohanesws/openshift-tasks/master/app-template-jenkinsfile.yaml -n ocp-tasks`,
 * Go to "Add to project" page,
 * Pick the `openshift-tasks-jenkinsfile` template,
 * Adapt the name of application to `jkf-tasks`,
@@ -118,7 +118,7 @@ If you have a look at the [Jenkinsfile](https://github.com/yohanesws/openshift-t
 
 ### #6 - Directly from IDE
 
-This last variant will show you how to directly deploy / hot redeploy your application from your IDE. For that we will [JBoss Developer Studio](https://developers.redhat.com/products/devstudio/overview/) that embeds the OpenShift plugin. To illustrate this flow within your `ocp-tasks` project, we assume that previous step (#2) has been done and template is already registered. You must also have a local copy of the project (cloned from `http://github.com/lbroudoux/openshift-tasks` for example) that is imported as a Maven project within your IDE.
+This last variant will show you how to directly deploy / hot redeploy your application from your IDE. For that we will [JBoss Developer Studio](https://developers.redhat.com/products/devstudio/overview/) that embeds the OpenShift plugin. To illustrate this flow within your `ocp-tasks` project, we assume that previous step (#2) has been done and template is already registered. You must also have a local copy of the project (cloned from `http://github.com/yohanesws/openshift-tasks` for example) that is imported as a Maven project within your IDE.
 
 First thing to do is to establish a connection to your OpenShift cluster - this maybe a remote or local instance, no matter. This can be easily done through the _OpenShift Explorer_ view in IDE as shown in screenshot below. The process of connecting is as straightforward as using the webc console. Once this is done, the view displays a tree of the resources you are allowed to access.
 
