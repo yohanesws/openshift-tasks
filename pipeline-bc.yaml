@@ -10,7 +10,7 @@ spec:
   strategy:
     jenkinsPipelineStrategy:
       jenkinsfile: |-
-        node('maven') {
+        node() {
             stage 'build'
             openshiftBuild(buildConfig: 'jkp-tasks', showBuildLogs: 'true')
 
