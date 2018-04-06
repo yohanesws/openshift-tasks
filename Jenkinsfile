@@ -3,7 +3,7 @@ node('maven') {
   def mvnCmd = "mvn"
   // injection of environment variables is not done so set them here...
   def sourceRef = "master"
-  def sourceUrl = "https://github.com/lbroudoux/openshift-tasks"
+  def sourceUrl = "https://github.com/yohanesws/openshift-tasks"
   def devProject = "ocp-tasks"
   def applicationName = "jkf-tasks"
 
